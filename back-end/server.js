@@ -17,11 +17,11 @@ app.get('/ping', (req, res) => {
 app.get('/list-user-groups', (req, res) =>{
     const baseUrl = "https://slack.com/api/usergroups.list";
     // const reqUrl = baseUrl+'?token='+process.env.S_SECRET;
-    const reqUrl = baseUrl+'?token='+process.env.U_TOKEN;
+    const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&include_count=true`;
 
     
 
-    console.log(reqUrl)
+    // console.log(reqUrl)
     const requestData = {
         token: process.env.SECRET,
     }
@@ -58,6 +58,8 @@ app.get('/list-user-groups', (req, res) =>{
         console.log(error)
     })
 })
+
+// Route for getting info from a particular user group:
 
 
 // app.listen(PORT, () => console.log(`App running on port ${PORT}`));
