@@ -14,7 +14,7 @@ app.get('/ping', (req, res) => {
     res.send("pong")
 })
 
-app.get('/list-user-groups', (req, res) =>{
+app.get('/list-user-groups', (req, res) => {
     const baseUrl = "https://slack.com/api/usergroups.list";
     // const reqUrl = baseUrl+'?token='+process.env.S_SECRET;
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&include_count=true`;
@@ -28,7 +28,6 @@ app.get('/list-user-groups', (req, res) =>{
 
     fetch(reqUrl, {
         method: 'GET',
-        // body: new URLSearchParams(requestData),
         headers: {
             'Content-Type': 'application/x-www-form-urlenconded'
         }
@@ -60,6 +59,34 @@ app.get('/list-user-groups', (req, res) =>{
 })
 
 // Route for getting info from a particular user group:
+app.get('/list-group-users', (req, res) => {
+    const baseUrl = 'https://slack.com/api/usergroups.users.list';
+    const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&usergroup=${req.params.group}`;
+
+    fetch(reqUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlenconded'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        }
+    })
+    .then(json => {
+        console.log(json)
+    })
+    .catch(error => {
+        res.status = error.statusCode;
+        console.log(error)
+    })
+})
 
 
 // app.listen(PORT, () => console.log(`App running on port ${PORT}`));
