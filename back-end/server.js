@@ -17,7 +17,6 @@ app.get('/ping', (req, res) => {
 app.get('/list-user-groups', (req, res) => {
     const baseUrl = "https://slack.com/api/usergroups.list";
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&include_count=true`;
-
     
 
     const requestData = {
