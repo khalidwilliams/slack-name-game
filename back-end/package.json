@@ -13,10 +13,12 @@
     "@babel/core": "^7.3.4",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "test": " mocha ./tests --recursive --require @babel/register",
+    "test": "jest",
     "start": "nodemon --exec babel-node server.js"
   },
   "author": "Khalid Williams",
