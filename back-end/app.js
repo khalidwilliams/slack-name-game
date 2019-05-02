@@ -31,22 +31,22 @@ app.get('/list-user-groups', (req, res) => {
     })
     .then((response) => {
         if (response.ok) {
-            console.log('In first then')
+            // console.log('In first then')
             return response.json()
         } else {
-            console.log(`I'm not ok (in first then)`)
+            // console.log(`I'm not ok (in first then)`)
             let error = new Error(response.statusText);
             error.response = response;
             throw error;
         }
     })
     .then(json => {
-        console.log(`in second then`)
-        console.log(json)
+        // console.log(`in second then`)
+        // console.log(json)
         res.send(json);
     })
     .catch(error => {
-        console.log('Been caught')
+        // console.log('Been caught')
         res.status = error.statusCode;
         console.log(error)
     })
