@@ -1,13 +1,4 @@
-import 'dotenv/config';
+import app from './app.js';
 
-
-import express from 'express';
-const app = express();
-import bodyParser from 'body-parser';
-const PORT = process.env.PORT || 8080;
-
-app.use(bodyParser.json());
-
-
-
-app.listen(PORT, () => console.log(`App running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`App running on port ${PORT}`));
+app.listen(8080, () => console.log(`App running on port 8080`));
