@@ -3,6 +3,10 @@ dotenv.config();
 
 import fetch from 'node-fetch';
 
+/*
+  THIS VERSION OF THE FILE IS NO LONGER BEING USED -- NOW EVERYTHING IS TESTED FROM APP.JS 
+*/
+
 const listGroupUsers = (req, res) => {
     const baseUrl = 'https://slack.com/api/usergroups.users.list';
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&usergroup=${req.params.group}`;
@@ -30,7 +34,7 @@ const listGroupUsers = (req, res) => {
         console.log(error)
     })
 
-    
+
 }
 
 module.exports = listGroupUsers;
