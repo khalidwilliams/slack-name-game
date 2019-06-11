@@ -17,7 +17,7 @@ app.get('/ping', (req, res) => {
 app.get('/list-user-groups', (req, res) => {
     const baseUrl = "https://slack.com/api/usergroups.list";
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&include_count=true`;
-    
+
 
     const requestData = {
         token: process.env.SECRET,
@@ -53,7 +53,7 @@ app.get('/list-user-groups', (req, res) => {
 })
 
 // Route for getting info from a particular user group:
-app.get('/list-group-users', (req, res) => {
+app.get('/list-group-users/:group', (req, res) => {
     const baseUrl = 'https://slack.com/api/usergroups.users.list';
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&usergroup=${req.params.group}`;
 
@@ -70,15 +70,16 @@ app.get('/list-group-users', (req, res) => {
         else {
             let error = new Error(response.statusText);
             error.response = response;
-            throw error;
+            // throw error;
         }
     })
     .then(json => {
-        console.log(json)
+      console.log('in then ', json)
     })
     .catch(error => {
+      // console.log('error caught')
         res.status = error.statusCode;
-        console.log(error)
+        console.error(error)
     })
 })
 
