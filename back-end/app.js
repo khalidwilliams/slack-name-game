@@ -11,7 +11,9 @@ let PORT = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 app.get('/ping', (req, res) => {
-    res.send("pong")
+    res
+    .status(200)
+    .send("pong")
 })
 
 app.get('/list-user-groups', (req, res) => {
@@ -64,22 +66,31 @@ app.get('/list-group-users/:group', (req, res) => {
         }
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        else {
-            let error = new Error(response.statusText);
-            error.response = response;
-            // throw error;
-        }
+      // res.send(response)
+      // console.log(response.ok)
+      // console.log('=====================================================')
+      // console.log(response)
+        // if (response.error) {
+        //   let error = new Error(response.statusText);
+        //   error.response = response;
+        //   throw error;
+        // }
+        // else {
+          return response.json();
+        // }
     })
     .then(json => {
-      console.log('in then ', json)
+      // console.log('in then ', json)
+      if (!json.ok) {
+        let error = new Error(json.error)
+        throw error;
+      }
+      res.send(json)
     })
     .catch(error => {
-      // console.log('error caught')
-        res.status = error.statusCode;
-        console.error(error)
+      console.log('error caught')
+      console.error(error)
+      res.status(404).send('Group not found')
     })
 })
 
