@@ -2,13 +2,19 @@ import app from '../../app.js';
 import request from 'supertest';
 
 describe('Server ping', () => {
-  test('recieve a pong', () => {
+  test('Receive a 200 status code', () => {
     return request(app)
       .get('/ping')
-      // .expect(200)
       .then(response => {
-        // console.log(response)
+        expect(response.statusCode).toBe(200)
+      });
+  });
+
+  test('Recieve a pong', () => {
+    return request(app)
+      .get('/ping')
+      .then(response => {
         expect(response.text).toBe('pong')
-      })
-  })
+      });
+  });
 })

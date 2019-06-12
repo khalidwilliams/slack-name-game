@@ -4,10 +4,10 @@ import { exportAllDeclaration } from '@babel/types';
 
 describe('List User Groups', () => {
   test('Recieve user groups', () => {
-    request(app)
+    return request(app)
       .get('/list-user-groups')
       .then(response => {
-        expect(response.ok).toBe('true');
+        expect(response.ok).toBe(true);
       })
   })
 })
