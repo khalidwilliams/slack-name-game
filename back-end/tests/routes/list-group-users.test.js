@@ -28,4 +28,12 @@ describe('List users from a group', () => {
         expect(response.ok).toBe(false)
       });
   });
+
+  test('Recieve a message and error if group does not exist', () => {
+    return request(app)
+      .get('/list-group-users/noGroup')
+      .then(response => {
+        expect(response.text).toBe('Group not found')
+      });
+  });
 });
