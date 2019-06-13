@@ -17,6 +17,24 @@ describe('Successfully get user', () => {
         // console.log(response.body)
         expect(response.body.profile).toBeTruthy();
         expect(response.body.profile.real_name).toBe('Brandy Mello');
-      })
-  })
-})
+    });
+  });
+});
+
+describe('Unsuccessfully get a user', () => {
+  test('Should return a status of 404 if unsuccessful', () => {
+    return request(app)
+      .get('/user-data/noSuchUser')
+      .then(response => {
+      expect(response.statusCode).toBe(404);
+    });
+  });
+
+  test('Should tell us the user doesn\'t exist', () => {
+    return request(app)
+      .get('/user-data/noSuchUser')
+      .then(response => {
+        expect(response.error.text).toBe('User not found')
+      });
+  });
+});
