@@ -14,8 +14,10 @@ app.get('/ping', (req, res) => {
     res
     .status(200)
     .send("pong")
-})
+});
 
+
+// Route for getting all user groups
 app.get('/list-user-groups', (req, res) => {
     const baseUrl = "https://slack.com/api/usergroups.list";
     const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&include_count=true`;
@@ -51,8 +53,8 @@ app.get('/list-user-groups', (req, res) => {
         // console.log('Been caught')
         res.status = error.statusCode;
         console.log(error)
-    })
-})
+    });
+});
 
 // Route for getting info from a particular user group:
 app.get('/list-group-users/:group', (req, res) => {
@@ -66,21 +68,9 @@ app.get('/list-group-users/:group', (req, res) => {
         }
     })
     .then(response => {
-      // res.send(response)
-      // console.log(response.ok)
-      // console.log('=====================================================')
-      // console.log(response)
-        // if (response.error) {
-        //   let error = new Error(response.statusText);
-        //   error.response = response;
-        //   throw error;
-        // }
-        // else {
           return response.json();
-        // }
     })
     .then(json => {
-      // console.log('in then ', json)
       if (!json.ok) {
         let error = new Error(json.error)
         throw error;
@@ -91,7 +81,34 @@ app.get('/list-group-users/:group', (req, res) => {
       console.log('error caught')
       console.error(error)
       res.status(404).send('Group not found')
-    })
+    });
+});
+
+// Route for getting info for a particular user:
+app.get('/user-data/:user', (req, res) => {
+  const baseUrl = 'https://slack.com/api/users.profile.get';
+  const reqUrl = `${baseUrl}?token=${process.env.U_TOKEN}&user=${req.params.user}`;
+
+  fetch(reqUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(json => {
+    if (!json.ok) {
+      let error = new Error(json.error);
+      throw error;
+    }
+    res.send(json);
+  })
+  .catch(error => {
+    console.error(error);
+    res.status(404).send('User not found');
+  })
 })
 
 module.exports = app;
