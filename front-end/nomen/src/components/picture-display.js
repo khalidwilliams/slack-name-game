@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-function PictureDisplay() {
+function PictureDisplay(props) {
   return (
-    <div>
-      <img src={this.props.img}/>
-    </div>
+    <article>
+      <img src={props.image}/>
+    </article>
   )
 }
 
-module.exports = PictureDisplay;
+export default PictureDisplay;
