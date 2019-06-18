@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import PictureDisplay from './components/picture-display.js';
+import PictureDisplay from './components/pictureDisplay.js';
+import NameChoice from './components/nameChoice.js';
 import './App.css';
 
 class App extends Component {
@@ -10,13 +11,21 @@ class App extends Component {
       currentStudent: {
         name:'',
         image:'',
-      }
+      },
+      nameChoices: ['Alpha', 'Beta', 'Gamma', 'Delta'],
     }
   }
 
   render() {
     return (
       <div className="App">
+        <header>nomen</header>
+        <section className="name-choice-container">
+          <NameChoice nameOption={this.state.nameChoices[0]} />
+          <NameChoice nameOption={this.state.nameChoices[1]} />
+          <NameChoice nameOption={this.state.nameChoices[2]} />
+          <NameChoice nameOption={this.state.nameChoices[3]} />
+        </section>
         <PictureDisplay image={this.state.currentStudent.image}/>
       </div>
     );
