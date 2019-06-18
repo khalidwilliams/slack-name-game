@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 function PictureDisplay(props) {
   return (
-    <article>
+    <article className="student-picture">
       <img src={props.image}/>
     </article>
   )

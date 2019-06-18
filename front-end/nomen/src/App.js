@@ -19,7 +19,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>nomen</header>
+        <header className="header">nomen</header>
         <section className="name-choice-container">
           <NameChoice nameOption={this.state.nameChoices[0]} />
           <NameChoice nameOption={this.state.nameChoices[1]} />
